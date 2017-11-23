@@ -2,7 +2,7 @@ package com.blackboxvision.reactnative.mercadopagocheckout;
 
 import android.content.Intent;
 import android.support.annotation.NonNull;
-
+import android.app.Activity;
 import com.facebook.react.bridge.ActivityEventListener;
 import com.facebook.react.bridge.Promise;
 import com.facebook.react.bridge.WritableMap;
@@ -79,8 +79,7 @@ public final class MercadoPagoCheckoutEventListener implements ActivityEventList
 
     public void onNewIntent(Intent intent) { }
 
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+    public void onActivityResult(Activity activity, int requestCode, int resultCode, Intent data) {
         if (currentPromise == null || requestCode != MercadoPagoCheckout.CHECKOUT_REQUEST_CODE) {
             return;
         }

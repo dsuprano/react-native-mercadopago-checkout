@@ -41,6 +41,22 @@ export class MercadoPagoCheckout {
         return await MercadoPagoCheckoutModule.startCheckoutForPaymentData(publicKey, preferenceId, params.backgroundColor, params.enableDarkFont);
     }
 
+    /**
+     * This function starts MercadoPago checkout to get a PaymentResult object with only debit and credit cards, so you don't create the Payment in your servers.
+     * Also you can send custom preferences.
+     *
+     * @param publicKey - MercadoPago API public Key
+     * @param options - An Object containing properties like: backgroundColor, enableDarkFont
+     * @returns {Promise.<*>} - Promise that if resolves gives a PaymentData object
+     */
+    static async startForPaymentCustomPreferenceOnlyCards(publicKey, nameItem, price, quantity, options) {
+        const params = { ...defaultOptions, ...options, publicKey, nameItem, price, quantity };
+
+        MercadoPagoCheckout._checkParams(params);
+
+        return await MercadoPagoCheckoutModule.startCheckoutForPaymentDataCustomPreferenceOnlyCards(publicKey, nameItem, price, quantity, params.backgroundColor, params.enableDarkFont);
+    }
+
     static _validate(key, value) {
         if (typeof value === 'undefined') {
             throw `${key} required to start MercadoPago checkout`;
